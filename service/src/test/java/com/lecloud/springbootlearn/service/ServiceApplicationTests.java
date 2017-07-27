@@ -1,4 +1,4 @@
-package com.lecloud.scheduletest.service;
+package com.lecloud.springbootlearn.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

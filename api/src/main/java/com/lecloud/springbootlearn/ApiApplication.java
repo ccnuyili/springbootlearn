@@ -1,4 +1,4 @@
-package com.lecloud.scheduletest;
+package com.lecloud.springbootlearn;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
