@@ -45,6 +45,38 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+<!--使用该Starter后，会自动使用在properties文件中定义的DataSource创建SqlSessionFactoryBean、SqlSessionTemplate。-->
+<!--根据mybatis.mapper-locations，mybatis.type-aliases-package指定的xml位置和PO类所在的包自动扫描Mappers，-->
+<!--连接到SqlSessionTemplate，并注册到Spring上下文中。-->
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
+
+		<dependency>
+			<!--@Data-->
+			<!--@NoArgsConstructor-->
+			<!--@AllArgsConstructor-->
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.16</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<!--最终打包的名字-->

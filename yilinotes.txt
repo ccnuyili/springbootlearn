@@ -1,1 +1,5 @@
 子module里的package必须是父module里的package的子目录结构。
+
+maven dependency:
+http://mvnrepository.com/search?q=spring-boot-maven-plugin
+

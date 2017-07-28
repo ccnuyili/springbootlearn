@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lecloud.springbootlearn.dao.StudentDAO">
+    <!--type:java实体类。id:resultMap标签的标识。-->
+    <resultMap type="StudentEntity" id="studentResultMap">
+        <!--id设置主键字段的映射关系-->
+        <id property="studentID" column="STUDENT_ID"/>
+        <!--result设置普通字段的映射关系-->
+        <result property="studentName" column="STUDENT_NAME"/>
+        <!--property指定PO Entity属性名。--> <!--column指定SQL查询结果的字段名或字段别名。-->
+        <result property="studentSex" column="STUDENT_SEX"/>
+        <result property="studentBirthday" column="STUDENT_BIRTHDAY"/>
+
+<!--        resultMap标签中还可以包含以下子标签：constructor，association，collection，discriminator
+        very good : http://www.cnblogs.com/xuerong/p/5000233.html-->
+    </resultMap>
+
+
+<!--     #{ }: 接收输入参数的名称,
+     ${}:表示拼接sql串，将接收到的参数内容不加任何修饰拼接在sql中. ${}中只能使用value-->
+
+<!--    resultType与resultMap： 总结：通过resultMap的字段映射关系将SQL查询结果构造出一个resultType类型的实例
+    resultType指定sql输出结果映射的java对象类型，select指定resultType表示将单条记录映射成java对象
+    使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。
+    如果查询出来的列名和pojo中的属性名全部不一致，没有创建pojo对象。
+    只要查询出来的列名和pojo中的属性有一个一致，就会创建pojo对象。
+    如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。-->
+
+   <!-- resultType输出pojo对象和pojo列表:
+    不管是输出的pojo单个对象还是一个列表（list中包括pojo），在mapper.xml中resultType指定的类型是一样的。
+    在mapper.java指定的方法返回值类型不一样：
+    (1)输出单个pojo对象，方法返回值是单个对象类型
+    (2)输出pojo对象list，方法返回值是List<Pojo>
+    生成的动态代理对象中是根据mapper方法的返回值类型确定是调用selectOne(返回单个对象调用)还是selectList （返回集合对象调用 ）.
+    (3)输出hashmap
+    输出pojo对象可以改用hashmap输出类型，将输出的字段名称作为map的key，value为字段值。如果是集合，那就是list里面套了HashMap。-->
+
+    <!--sql标签用来定义可重用的SQL代码-->
+
+<!--    若传入的参数是集合类型，则用foreach:
+    http://www.cnblogs.com/fangyu19900812/p/6046209.html-->
+
+
+
+    <!-- 查询学生，根据id -->
+    <select id="getStudent" parameterType="String" resultType="StudentEntity" resultMap="studentResultMap">
+        SELECT * from STUDENT_TBL ST
+                WHERE ST.STUDENT_ID = #{studentID}
+    </select>
+
+    <!-- 查询学生列表 -->
+    <select id="getStudentAll"  resultType="StudentEntity" resultMap="studentResultMap">
+        SELECT * from STUDENT_TBL
+    </select>
+</mapper>
