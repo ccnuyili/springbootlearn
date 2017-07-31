@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DomainQueryResultVO {
-    List<DomainVO> domain;
+    List<DomainVO> domain;  //domain对应json中的一级属性名
 }

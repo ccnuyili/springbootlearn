@@ -1,8 +1,6 @@
 package com.lecloud.springbootlearn.service;
 
 import com.lecloud.springbootlearn.cons.MyConst;
-import com.lecloud.springbootlearn.dao.StudentDAO;
-import com.lecloud.springbootlearn.po.StudentEntity;
 import com.lecloud.springbootlearn.util.MyUtil;
 import com.lecloud.springbootlearn.vo.DomainQueryResultVO;
 import org.apache.http.client.config.RequestConfig;
@@ -12,27 +10,20 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.util.List;
+
+import java.net.URI;
 
 @Service
-public class MyService {
-
-    @Autowired
-    public StudentDAO studentDAO;
-
+public class RestTemplateService {
     @Value("${domain.url}")
     private String domainUrl;
 
-    public List<StudentEntity> studentMapperTest() {
-        return studentDAO.getStudentAll();
-    }
+    @Value("${url}")
+    private String myUrl;
 
     public DomainQueryResultVO accessUrlbyRestTemplate() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
@@ -54,7 +45,7 @@ public class MyService {
     public void accessUrlByCloseableHttpClient() throws Exception{
         CloseableHttpClient httpclient = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(1000).setConnectTimeout(1000).build();
-        HttpGet httpGet = new HttpGet(domainUrl);
+        HttpGet httpGet = new HttpGet(myUrl);
         httpGet.setConfig(requestConfig);
         httpGet.setHeader(new BasicHeader(MyConst.HEADER_HOST.getKey(), MyConst.HEADER_HOST.getValue()));
         CloseableHttpResponse response = httpclient.execute(httpGet);
@@ -64,5 +55,21 @@ public class MyService {
             result = Integer.parseInt(EntityUtils.toString(response.getEntity()).trim());
         }
     }
-}
 
+    public void accessUrlbyRestTemplateExchange() throws Exception {
+        RestTemplate restTemplate = new RestTemplate();
+        URI uri=new URI(myUrl);
+        HttpHeaders header = new HttpHeaders();
+        //header.setAccept(singletonList(MediaType.valueOf("application/json")));
+        header.set("yiliheaderkey", MyConst.HEADER_HOST.getValue());
+        header.set("Authorization","Basic MTIzNDU6ODFhOWI1M2IwZmNlYWIzODVmMTM1ZTdjZDgyMWQzMWI0Njg5MTdmN2YwNWMzMGMwNmIyNGJlMzMzM2ZlNDAxOQ==");
+
+        //经测试，以下方式正常情况是可行的，服务端能接收到header信息。但不知为何请求不了回源并发数接口。
+        RequestEntity<String> requestEntity = new RequestEntity<String>(header, HttpMethod.GET,uri);
+        ResponseEntity<String> response = restTemplate.exchange(requestEntity, String.class);
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
+            String responseString = response.getBody();
+        }
+    }
+
+}

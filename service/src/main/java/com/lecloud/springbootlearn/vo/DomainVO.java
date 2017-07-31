@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DomainVO {
-    private String domain;
+    private String domain;     //domain,serviceType对应json中的二级属性名
     private String serviceType;
 }

@@ -13,7 +13,7 @@
         <result property="studentBirthday" column="STUDENT_BIRTHDAY"/>
 
 <!--        resultMap标签中还可以包含以下子标签：constructor，association，collection，discriminator
-        very good : http://www.cnblogs.com/xuerong/p/5000233.html-->
+        mybatis 教程实例 very good : http://www.cnblogs.com/xuerong/p/5000233.html-->
     </resultMap>
 
 
