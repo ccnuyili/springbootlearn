@@ -61,7 +61,7 @@ public class RestTemplateService {
         URI uri=new URI(myUrl);
         HttpHeaders header = new HttpHeaders();
         //header.setAccept(singletonList(MediaType.valueOf("application/json")));
-        header.set("yiliheaderkey", MyConst.HEADER_HOST.getValue());
+        header.set(MyConst.HEADER_HOST.getKey(), MyConst.HEADER_HOST.getValue());
         header.set("Authorization","Basic MTIzNDU6ODFhOWI1M2IwZmNlYWIzODVmMTM1ZTdjZDgyMWQzMWI0Njg5MTdmN2YwNWMzMGMwNmIyNGJlMzMzM2ZlNDAxOQ==");
 
         //经测试，以下方式正常情况是可行的，服务端能接收到header信息。但不知为何请求不了回源并发数接口。

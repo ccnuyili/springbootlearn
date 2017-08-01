@@ -22,12 +22,15 @@ public class SpringbootLearnController {
 
     @RequestMapping(path = "/student")
     public ResponseEntity StudentMapperController() throws Exception {
+        System.out.println("student is running");
+
         //mybatis
         List<StudentEntity> studentEntityList = myService.studentMapperTest();
 
         //设置响应报文头部
         HttpHeaders headers = new HttpHeaders();
         headers.add("a","b");
+        System.out.println("student will run over");
         return (ResponseEntity.ok().headers(headers).body(studentEntityList));
         /*
         1.ResponseEntity.ok()最终返回statusCode为OK的DefaultBuilder对象，该对象有2个字段：Object statusCode，HttpHeaders headers
@@ -38,8 +41,9 @@ public class SpringbootLearnController {
 
     @RequestMapping(path = "/httptest")
     public void restTemplateController() throws Exception {
-        restTemplateService.accessUrlByCloseableHttpClient();
+        System.out.println("httptest is running");
+     //   restTemplateService.accessUrlByCloseableHttpClient();
         restTemplateService.accessUrlbyRestTemplateExchange();
-        restTemplateService.accessUrlbyRestTemplate();
+      //  restTemplateService.accessUrlbyRestTemplate();
     }
 }
