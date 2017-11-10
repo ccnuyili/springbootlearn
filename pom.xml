@@ -76,6 +76,11 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jooq</groupId>
@@ -120,7 +125,7 @@
 		<repository>
 			<id>letv-nexus-releases</id>
 			<name>letv-nexus-releases</name>
-			<url>http://maven.letv.cn/nexus/content/repositories/releases</url>
+			<url>http://maven.letv.cn/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 

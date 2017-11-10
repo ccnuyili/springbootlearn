@@ -43,7 +43,7 @@ public class SpringbootLearnController {
     public void restTemplateController() throws Exception {
         System.out.println("httptest is running");
      //   restTemplateService.accessUrlByCloseableHttpClient();
-        restTemplateService.accessUrlbyRestTemplateExchange();
+     //  restTemplateService.accessUrlbyRestTemplateExchange();
       //  restTemplateService.accessUrlbyRestTemplate();
     }
 }
